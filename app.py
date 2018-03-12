@@ -22,10 +22,10 @@ fan = 27
 # initialize GPIO status variables
 tv_Sts = 0
 dvd_Sts = 0
-set_top_box = 0
-projector = 0
-ac = 0
-fan = 0
+set_top_box_Sts = 0
+projector_Sts = 0
+ac_Sts = 0
+fan_Sts = 0
 
 # Define relay pins as output
 GPIO.setup(tv, GPIO.OUT)

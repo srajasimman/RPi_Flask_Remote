@@ -31,6 +31,7 @@
     <th><a href="/projector/off"><img src="../static/projector_{{ projector }}.png" alt="{{ projector }}"></a></th>
     {% endif %}
   </tr>
+  <tr>
     {% if ac == 0 %}
     <th><a href="/ac/on"><img src="../static/ac_{{ ac }}.png" alt="{{ ac }}"></a></th>
     {% elif ac == 1 %}
@@ -42,6 +43,7 @@
     {% elif fan == 1 %}
     <th><a href="/fan/off"><img src="../static/fan_{{ fan }}.png" alt="{{ fan }}"></a></th>
     {% endif %}
+   </tr>
 </table>
    </body>
 </html>
