@@ -6,16 +6,42 @@
    <body>
 <table style="width:100%">
   <tr>
-    <th><a href="/tv/on" class="button0"><img src="../static/tv_{{ tv }}.png" alt="{{ tv }}"></a></th>
-    <th><a href="/dvd/on" class="button0"><img src="../static/dvd_{{ dvd }}.png" alt="{{ dvd }}"></a></th>
+    {% if tv == 0 %}
+    <th><a href="/tv/on"><img src="../static/tv_{{ tv }}.png" alt="{{ tv }}"></a></th>
+    {% elif tv == 1 %}
+    <th><a href="/tv/off"><img src="../static/tv_{{ tv }}.png" alt="{{ tv }}"></a></th>
+    {% endif %}
+
+    {% if dvd == 0 %}
+    <th><a href="/dvd/on"><img src="../static/dvd_{{ dvd }}.png" alt="{{ dvd }}"></a></th>
+    {% elif dvd == 1 %}
+    <th><a href="/dvd/off"><img src="../static/dvd_{{ dvd }}.png" alt="{{ dvd }}"></a></th>
+    {% endif %}
   </tr>
   <tr>
-    <th><a href="/set_top_box/on" class="button0"><img src="../static/set_top_box_{{ set_top_box }}.png" alt="{{ set_top_box }}"></a></th>
-    <th><a href="/projector/on" class="button0"><img src="../static/projector_{{ projector }}.png" alt="{{ projector }}"></a></th>
+    {% if set_top_box == 0 %}
+    <th><a href="/set_top_box/on"><img src="../static/set_top_box_{{ set_top_box }}.png" alt="{{ set_top_box }}"></a></th>
+    {% elif set_top_box == 1 %}
+    <th><a href="/set_top_box/off"><img src="../static/set_top_box_{{ set_top_box }}.png" alt="{{ set_top_box }}"></a></th>
+    {% endif %}
+
+    {% if set_top_box == 0 %}
+    <th><a href="/set_top_box/on"><img src="../static/set_top_box_{{ set_top_box }}.png" alt="{{ set_top_box }}"></a></th>
+    {% elif set_top_box == 1 %}
+    <th><a href="/set_top_box/off"><img src="../static/set_top_box_{{ set_top_box }}.png" alt="{{ set_top_box }}"></a></th>
+    {% endif %}
   </tr>
-    <th><a href="/ac/on" class="button0"><img src="../static/ac_{{ ac }}.png" alt="{{ ac }}"></a></th>
-    <th><a href="/fan/on" class="button0"><img src="../static/fan_{{ fan }}.png" alt="{{ fan }}"></a></th>
+    {% if ac == 0 %}
+    <th><a href="/ac/on"><img src="../static/ac_{{ ac }}.png" alt="{{ ac }}"></a></th>
+    {% elif ac == 1 %}
+    <th><a href="/ac/off"><img src="../static/ac_{{ ac }}.png" alt="{{ ac }}"></a></th>
+    {% endif %}
+
+    {% if fan == 0 %}
+    <th><a href="/fan/on"><img src="../static/fan_{{ fan }}.png" alt="{{ fan }}"></a></th>
+    {% elif fan == 1 %}
+    <th><a href="/fan/off"><img src="../static/fan_{{ fan }}.png" alt="{{ fan }}"></a></th>
+    {% endif %}
 </table>
    </body>
 </html>
-
