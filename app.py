@@ -2,22 +2,21 @@
 '''
 	Raspberry Pi GPIO Status and Control
 '''
-import RPi.GPIO as GPIO
 from flask import Flask, render_template
+from gpiozero.pins.mock import MockFactory
+from gpiozero import OutputDevice, Device
+
 
 app = Flask(__name__)
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
+Device.pin_factory = MockFactory()
 
 # define GPIO pins for relay
-tv = 17
-dvd = 18
-set_top_box = 22
-projector = 23
-ac = 24
-fan = 27
-
+tv = OutputDevice(pin=17, initial_value=False)
+dvd = OutputDevice(pin=18, initial_value=False)
+set_top_box = OutputDevice(pin=22, initial_value=False)
+projector = OutputDevice(pin=23, initial_value=False)
+ac = OutputDevice(pin=24, initial_value=False)
+fan = OutputDevice(pin=27, initial_value=False)
 
 # initialize GPIO status variables
 tv_Sts = 0
@@ -27,33 +26,15 @@ projector_Sts = 0
 ac_Sts = 0
 fan_Sts = 0
 
-# Define relay pins as output
-GPIO.setup(tv, GPIO.OUT)
-GPIO.setup(dvd, GPIO.OUT)
-GPIO.setup(set_top_box, GPIO.OUT)
-GPIO.setup(projector, GPIO.OUT)
-GPIO.setup(ac, GPIO.OUT)
-GPIO.setup(fan, GPIO.OUT)
-
-
-# turn relay OFF at start
-GPIO.output(tv, GPIO.LOW)
-GPIO.output(dvd, GPIO.LOW)
-GPIO.output(set_top_box, GPIO.LOW)
-GPIO.output(projector, GPIO.LOW)
-GPIO.output(ac, GPIO.LOW)
-GPIO.output(fan, GPIO.LOW)
-
-
 @app.route("/")
 def index():
     # Read Realay Status
-    tv_Sts = GPIO.input(tv)
-    dvd_Sts = GPIO.input(dvd)
-    set_top_box_Sts = GPIO.input(set_top_box)
-    projector_Sts = GPIO.input(projector)
-    ac_Sts = GPIO.input(ac)
-    fan_Sts = GPIO.input(fan)
+    tv_Sts = tv.value
+    dvd_Sts = dvd.value
+    set_top_box_Sts = set_top_box.value
+    projector_Sts = projector.value
+    ac_Sts = ac.value
+    fan_Sts = fan.value
 
     templateData = {
         'tv': tv_Sts,
@@ -89,17 +70,17 @@ def action(deviceName, action):
         actuator = fan
 
     if action == "on":
-        GPIO.output(actuator, GPIO.HIGH)
+		actuator.on()
 
     if action == "off":
-        GPIO.output(actuator, GPIO.LOW)
+		actuator.off()
 
-    tv_Sts = GPIO.input(tv)
-    dvd_Sts = GPIO.input(dvd)
-    set_top_box_Sts = GPIO.input(set_top_box)
-    projector_Sts = GPIO.input(projector)
-    ac_Sts = GPIO.input(ac)
-    fan_Sts = GPIO.input(fan)
+    tv_Sts = tv.value
+    dvd_Sts = dvd.value
+    set_top_box_Sts = set_top_box.value
+    projector_Sts = projector.value
+    ac_Sts = ac.value
+    fan_Sts = fan.value
 
     templateData = {
         'tv': tv_Sts,
@@ -118,4 +99,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
     finally:
-        GPIO.cleanup()
